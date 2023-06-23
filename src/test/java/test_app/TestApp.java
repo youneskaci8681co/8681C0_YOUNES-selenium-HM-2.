@@ -7,11 +7,18 @@ import org.testng.annotations.Test;
 
 public class TestApp extends BasePage {
 
-    @Test (priority = 0, groups = {"BAT"})
-    public void testNavigationToApplication() {
-        Homepage homepage = new Homepage();
+    @Test
+    public void testSuccessfulRegistration() {
+        // Test Data
+        String name = "YOUNES";
+        String email = "youneskaci388@yahoo.com";
+        String password = "MOT2passe";
 
-        Assert.assertTrue(isElementVisible(homepage.logo));
-    }
 
-}
+
+
+    } }
+
+
+
+

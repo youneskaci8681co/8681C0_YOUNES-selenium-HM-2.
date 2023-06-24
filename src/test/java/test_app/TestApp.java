@@ -275,3 +275,59 @@ import java.util.concurrent.TimeUnit;
 
             }
 
+
+
+public class CheckoutAsGuestTest {
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        // Set up the WebDriver instance (e.g., ChromeDriver)
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        // Quit the WebDriver instance
+        driver.quit();
+    }
+
+    @Test
+    public void checkoutAsGuestTest() {
+        // Test Steps
+        driver.get("https://magento.softwaretestingboard.com/");
+        addItemToCart();
+        driver.findElement(By.cssSelector("a.action.showcart")).click();
+        driver.findElement(By.cssSelector("button.action.primary.checkout")).click();
+
+        // Fill in guest checkout details
+        fillGuestCheckoutDetails();
+
+        // Click on the "Continue" button
+        driver.findElement(By.cssSelector("button#guest-next-step")).click();
+
+        // Expected Results
+        WebElement orderSummaryPageTitle = driver.findElement(By.cssSelector("h1.page-title"));
+        Assert.assertEquals(orderSummaryPageTitle.getText(), "Order Summary", "The guest checkout process is successful");
+    }
+
+
+    }
+
+    private void fillGuestCheckoutDetails() {
+        // Fill in the guest checkout details
+        driver.findElement(By.id("customer-email")).sendKeys("roni_cost@example.com");
+        driver.findElement(By.id("customer-firstname")).sendKeys("younes");
+        driver.findElement(By.id("customer-lastname")).sendKeys("kaci");
+        driver.findElement(By.id("customer-street")).sendKeys("8525 main street");
+        driver.findElement(By.id("customer-city")).sendKeys("denver");
+        driver.findElement(By.id("customer-country")).sendKeys("United States");
+        driver.findElement(By.id("customer-region_id")).sendKeys("colorado");
+        driver.findElement(By.id("customer-postcode")).sendKeys("80205");
+        driver.findElement(By.id("customer-telephone")).sendKeys("3031234565");
+    }
+}
+
+

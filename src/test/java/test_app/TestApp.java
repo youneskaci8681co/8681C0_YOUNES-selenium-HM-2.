@@ -7,10 +7,8 @@ import org.testng.annotations.Test;
 
 import static org.openqa.selenium.By.xpath;
 
-public class TestApp extends BasePage {
+pbpublic class TestApp extends BasePage {
 
-
-    import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -199,10 +197,7 @@ import java.util.concurrent.TimeUnit;
                             Assert.assertEquals(updatedQuantity, "3", "The quantity of the selected item in the cart is updated to 3");
                         }
 
-                        private void addItemsToCart() {
-                            // Code to add multiple items to the cart
-                            // You can modify this method based on the actual steps to add items to the cart
-                        }
+
                     }
 
                 }
@@ -240,47 +235,43 @@ import java.util.concurrent.TimeUnit;
                     Assert.assertTrue(emptyCartMessage.isDisplayed(), "The selected item is successfully removed from the cart");
                 }
 
-                private void addItemToCart() {
-                    // Code to add an item to the cart
-                    // You can modify this method based on the actual steps to add an item to the cart
-                }
+
             }
 
 
 
-            public class RemoveItemFromCartTest {
+
+
+            public class ProceedToCheckoutTest {
                 private WebDriver driver;
 
                 @BeforeMethod
                 public void setUp() {
                     // Set up the WebDriver instance (e.g., ChromeDriver)
-                    System.setProperty("webdriver.chrome.driver", "/html/body/div[1]/header/div[2]/div[1]/a");
+                    System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
                     driver = new ChromeDriver();
                     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 }
 
                 @AfterMethod
                 public void tearDown() {
-                    // Quit the WebDriver instance
+                    /
                     driver.quit();
                 }
 
                 @Test
-                public void removeItemFromCartTest() {
+                public void proceedToCheckoutTest() {
                     // Test Steps
                     driver.get("https://magento.softwaretestingboard.com/");
                     addItemToCart();
                     driver.findElement(By.cssSelector("a.action.showcart")).click();
-                    WebElement removeButton = driver.findElement(By.cssSelector("a.action.delete"));
-                    removeButton.click();
+                    driver.findElement(By.cssSelector("button.action.primary.checkout")).click();
 
                     // Expected Results
-                    WebElement emptyCartMessage = driver.findElement(By.cssSelector("div.message.empty-cart"));
-                    Assert.assertTrue(emptyCartMessage.isDisplayed(), "The selected item is successfully removed from the cart");
+                    WebElement checkoutPageTitle = driver.findElement(xpath /*[@id="top-cart-btn-checkout"]"));
+                    Assert.assertEquals(checkoutPageTitle.getText(), "Checkout", "The user is directed to the checkout process");
                 }
 
-                private void addItemToCart() {
-                    // Code to add an item to the cart
-                    // You can modify this method based on the actual steps to add an item to the cart
-                }
+
             }
+

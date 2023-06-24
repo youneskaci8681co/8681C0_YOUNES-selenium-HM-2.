@@ -97,3 +97,36 @@ import java.util.concurrent.TimeUnit;
             Assert.assertTrue(welcomeMessage.isDisplayed());
             Assert.assertEquals(welcomeMessage.getText(), "Hello, younes kaci");
 
+
+
+
+            public class ItemSearchTest {
+                private WebDriver driver;
+
+                @BeforeMethod
+                public void setUp() {
+                    // Set up the WebDriver instance (e.g., ChromeDriver)
+                    System.setProperty("webdriver.chrome.driver", "path/input_id_search");
+                    driver = new ChromeDriver();
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                }
+
+                @AfterMethod
+                public void tearDown() {
+                    // Quit the WebDriver instance
+                    driver.quit();
+                }
+
+                @Test
+                public void itemSearchTest() {
+                    // Test Steps
+                    driver.get("https://magento.softwaretestingboard.com/");
+                    driver.findElement(By.id("search")).sendKeys("phone");
+                    driver.findElement(By.cssSelector("button[title='Search']")).click();
+
+                    // Expected Results
+                    List<WebElement> searchResults = driver.findElements(By.cssSelector("li.product-item"));
+                    Assert.assertTrue(searchResults.size() > 0, "Search results are displayed for the keyword 'phone'.");
+                }
+            }
+

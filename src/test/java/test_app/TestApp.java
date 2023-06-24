@@ -164,6 +164,47 @@ import java.util.concurrent.TimeUnit;
                     Assert.assertTrue(cartIcon.isDisplayed(), "Cart icon is displayed");
                     String cartItemCount = cartIcon.getText();
                     Assert.assertEquals(cartItemCount, "1", "Cart item count is updated");
+
+
+                    public class ModifyCartItemQuantityTest {
+                        private WebDriver driver;
+
+                        @BeforeMethod
+                        public void setUp() {
+                            // Set up the WebDriver instance (e.g., ChromeDriver)
+                            System.setProperty("webdriver.chrome.driver", <span class="counter-number">);
+                            driver = new ChromeDriver();
+                            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                        }
+
+                        @AfterMethod
+                        public void tearDown() {
+                            // Quit the WebDriver instance
+                            driver.quit();
+                        }
+
+                        @Test
+                        public void modifyCartItemQuantityTest() {
+                            // Test Steps
+                            driver.get("https://magento.softwaretestingboard.com/");
+                            addItemsToCart();
+                            driver.findElement(By.cssSelector("a.action.showcart")).click();
+                            WebElement quantityField = driver.findElement(By.cssSelector("input.cart-item-qty"));
+                            quantityField.clear();
+                            quantityField.sendKeys("3");
+                            driver.findElement(By.cssSelector("button.update-cart-item")).click();
+
+                            // Expected Results
+                            String updatedQuantity = quantityField.getAttribute("value");
+                            Assert.assertEquals(updatedQuantity, "3", "The quantity of the selected item in the cart is updated to 3");
+                        }
+
+                        private void addItemsToCart() {
+                            // Code to add multiple items to the cart
+                            // You can modify this method based on the actual steps to add items to the cart
+                        }
+                    }
+
                 }
             }
 

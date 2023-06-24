@@ -331,3 +331,72 @@ public class CheckoutAsGuestTest {
 }
 
 
+public class OrderConfirmationTest {
+    // Test data
+    private String email = "roni_cost@example.com";
+    private String password = "roni_cost3@example.com";
+
+    // Set up before the test class
+    @BeforeClass
+    public void setUp() {
+        // Navigate to the Magento website
+        // Perform necessary setup steps (e.g., launch browser, open URL)
+    }
+
+    // Tear down after the test class
+    @AfterClass
+    public void tearDown() {
+        // Perform necessary cleanup steps (e.g., close browser)
+    }
+
+    // Test case to verify order confirmation message
+    @Test
+    public void verifyOrderConfirmationMessage() {
+        // Sign in with valid user credentials
+        signIn(email, password);
+
+        // Add an item to the cart
+        addItemToCart();
+
+        // Go through the checkout process
+        checkoutProcess();
+
+        // Complete the payment process
+        completePayment();
+
+        // Verify the order confirmation message is displayed
+        Assert.assertTrue(isOrderConfirmationMessageDisplayed(), "Order confirmation message is not displayed");
+
+        // Verify the user received an order confirmation email
+        Assert.assertTrue(isOrderConfirmationEmailReceived(email), "Order confirmation email is not received");
+    }
+
+    // Helper methods (implement as per your application's functionality)
+
+    private void signIn(String email, String password) {
+        // Implement sign-in functionality using the provided credentials
+    }
+
+    private void addItemToCart() {
+        // Implement adding an item to the cart
+    }
+
+    private void checkoutProcess() {
+        // Implement the steps required for the checkout process
+    }
+
+    private void completePayment() {
+        // Implement the payment process (e.g., enter payment details, complete transaction)
+    }
+
+    private boolean isOrderConfirmationMessageDisplayed() {
+        // Implement logic to check if the order confirmation message is displayed on the page
+        return false;
+    }
+
+    private boolean isOrderConfirmationEmailReceived(String email) {
+        // Implement logic to check if the user received an order confirmation email
+        return false;
+    }
+}
+

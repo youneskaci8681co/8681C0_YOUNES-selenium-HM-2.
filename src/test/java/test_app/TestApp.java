@@ -208,3 +208,41 @@ import java.util.concurrent.TimeUnit;
                 }
             }
 
+
+            public class RemoveItemFromCartTest {
+                private WebDriver driver;
+
+                @BeforeMethod
+                public void setUp() {
+                    // Set up the WebDriver instance (e.g., ChromeDriver)
+                    System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+                    driver = new ChromeDriver();
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                }
+
+                @AfterMethod
+                public void tearDown() {
+                    // Quit the WebDriver instance
+                    driver.quit();
+                }
+
+                @Test
+                public void removeItemFromCartTest() {
+                    // Test Steps
+                    driver.get("https://magento.softwaretestingboard.com/");
+                    addItemToCart();
+                    driver.findElement(By.cssSelector("a.action.showcart")).click();
+                    WebElement removeButton = driver.findElement(By.cssSelector("a.action.delete"));
+                    removeButton.click();
+
+                    // Expected Results
+                    WebElement emptyCartMessage = driver.findElement(By.cssSelector("div.message.empty-cart"));
+                    Assert.assertTrue(emptyCartMessage.isDisplayed(), "The selected item is successfully removed from the cart");
+                }
+
+                private void addItemToCart() {
+                    // Code to add an item to the cart
+                    // You can modify this method based on the actual steps to add an item to the cart
+                }
+            }
+

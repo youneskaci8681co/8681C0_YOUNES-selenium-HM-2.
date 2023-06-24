@@ -130,3 +130,40 @@ import java.util.concurrent.TimeUnit;
                 }
             }
 
+
+            public class AddItemToCartTest {
+                private WebDriver driver;
+
+                @BeforeMethod
+                public void setUp() {
+                    // Set up the WebDriver instance (e.g., ChromeDriver)
+                    System.setProperty("webdriver.chrome.driver", "<button type=\"submit\" title=\"Add to Cart\");
+                    driver = new ChromeDriver();
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                }
+
+                @AfterMethod
+                public void tearDown() {
+                    // Quit the WebDriver instance
+                    driver.quit();
+                }
+
+                @Test
+                public void addItemToCartTest() {
+                    // Test Steps
+                    driver.get("https://magento.softwaretestingboard.com/");
+                    driver.findElement(By.id("search")).sendKeys("phone");
+                    driver.findElement(By.cssSelector("button[title='Search']")).click();
+                    WebElement itemLink = driver.findElement(By.cssSelector("a.product-item-link"));
+                    String itemName = itemLink.getText();
+                    itemLink.click();
+                    driver.findElement(By.cssSelector("button.tocart")).click();
+
+                    // Expected Results
+                    WebElement cartIcon = driver.findElement(By.cssSelector("span.counter-number"));
+                    Assert.assertTrue(cartIcon.isDisplayed(), "Cart icon is displayed");
+                    String cartItemCount = cartIcon.getText();
+                    Assert.assertEquals(cartItemCount, "1", "Cart item count is updated");
+                }
+            }
+
